@@ -10,9 +10,8 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 class UserController extends Controller
 {
     public function index(){
-       $user = UserModel::findor(20,['username','nama'], function (){
-        abort(404);
-       });
+       $user = UserModel::where('username','manager')->firstOrFail();
        return view('user',['data' => $user]);
+       }
     }
-}
+
