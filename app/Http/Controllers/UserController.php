@@ -10,11 +10,9 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 class UserController extends Controller
 {
     public function index(){
-        $data = [
-            'nama' => 'Pelanggan Pertama',
-        ];
-        UserModel::where('username','customer-1')->update($data);
-        $user=UserModel::all();
-        return view('user',['data' => $user]);
+       $user = UserModel::findor(20,['username','nama'], function (){
+        abort(404);
+       });
+       return view('user',['data' => $user]);
     }
 }
